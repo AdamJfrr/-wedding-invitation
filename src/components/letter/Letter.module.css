@@ -106,22 +106,23 @@
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
-/* 4. Middle Content Card - Full 100vh Layout */
+/* 4. Middle Content Card - Fixed mobile cut-off with min-height and safe padding */
 .card {
   position: relative;
-  width: 86vw;
+  width: 90vw;
   height: 100vh;
-  max-width: none;
-  max-height: none;
+  min-height: 100vh;
+  max-width: 540px;
   background-color: transparent;
   border-radius: 0;
-  padding: clamp(0.4rem, 1.2vh, 0.8rem) 0.4rem;
+  padding: clamp(1rem, 3vh, 2rem) 0.5rem clamp(3.5rem, 6vh, 4.5rem) 0.5rem;
   box-shadow: none;
   border: none;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
   box-sizing: border-box;
   color: #38302e;
   overflow-y: auto;
@@ -132,17 +133,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   width: 100%;
-  height: 100%;
-  gap: clamp(0.2rem, 0.5vh, 0.4rem);
+  height: auto;
+  gap: clamp(0.2rem, 0.6vh, 0.4rem);
+  margin: auto 0;
 }
 
-/* Rococo Frame Container - Optimized proportion */
+/* Rococo Frame Container - Compact proportions so it fits phones easily */
 .rococoFrameContainer {
   position: relative;
-  width: clamp(210px, 52vw, 290px);
-  height: clamp(270px, 66vw, 360px);
+  width: clamp(130px, 32vw, 175px);
+  height: clamp(165px, 41vw, 225px);
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -175,14 +177,15 @@
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+  font-size: clamp(0.6rem, 1.3vw, 0.72rem);
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #4a3f3c;
   width: 100%;
   flex-wrap: wrap;
+  margin-top: 0.1rem;
 }
 
 .parentNames {
@@ -197,25 +200,25 @@
 }
 
 .inviteText {
-  font-size: clamp(0.72rem, 1.7vw, 0.88rem);
+  font-size: clamp(0.64rem, 1.4vw, 0.75rem);
   font-style: italic;
   font-weight: 400;
   color: #594d48;
-  max-width: 500px;
+  max-width: 460px;
   margin: 0 auto;
-  line-height: 1.25;
+  line-height: 1.15;
   letter-spacing: 0.02em;
 }
 
 /* Heavy Romantic Focus Names Styling (Calligraphy Script) */
 .names {
   font-family: 'Alex Brush', cursive;
-  font-size: clamp(2.1rem, 5.5vw, 3rem);
+  font-size: clamp(1.8rem, 4.5vw, 2.4rem);
   font-weight: 400;
   color: #241c1a;
   letter-spacing: 0.04em;
   margin: 0.05rem 0;
-  line-height: 1;
+  line-height: 0.9;
 }
 
 .nameAnd {
@@ -228,12 +231,12 @@
   vertical-align: middle;
 }
 
-/* Translated Schedule Details Block - Clean layout without borders/lines */
+/* Translated Schedule Details Block */
 .detailsBlock {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.2rem, 0.5vh, 0.35rem);
-  font-size: clamp(0.68rem, 1.5vw, 0.82rem);
+  gap: clamp(0.08rem, 0.25vh, 0.18rem);
+  font-size: clamp(0.62rem, 1.3vw, 0.72rem);
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 500;
@@ -242,12 +245,12 @@
   outline: none;
   box-shadow: none;
   background: transparent;
-  padding: clamp(0.2rem, 0.4vh, 0.4rem) 0;
+  padding: 0;
   color: #3b312e;
-  width: 92%;
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.35;
+  width: 94%;
+  max-width: 480px;
+  margin: 0.05rem auto 0 auto;
+  line-height: 1.2;
 }
 
 .detailLine {
@@ -286,7 +289,9 @@
 
 .closeButton {
   position: absolute;
-  bottom: 0.4rem;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 50;
   font-size: 0.65rem;
   font-family: 'Montserrat', sans-serif;
@@ -299,4 +304,3 @@
   text-underline-offset: 4px;
   cursor: pointer;
 }
-
