@@ -106,16 +106,15 @@
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
-/* 4. Middle Content Card - Fixed mobile cut-off with min-height and safe padding */
+/* 4. Middle Content Card - Fully scrollable on mobile */
 .card {
   position: relative;
   width: 90vw;
   height: 100vh;
-  min-height: 100vh;
   max-width: 540px;
   background-color: transparent;
   border-radius: 0;
-  padding: clamp(1rem, 3vh, 2rem) 0.5rem clamp(3.5rem, 6vh, 4.5rem) 0.5rem;
+  padding: clamp(1rem, 2vh, 1.5rem) 0.5rem 4rem 0.5rem;
   box-shadow: none;
   border: none;
   text-align: center;
@@ -127,6 +126,7 @@
   color: #38302e;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  z-index: 30;
 }
 
 .cardContent {
@@ -136,11 +136,11 @@
   justify-content: flex-start;
   width: 100%;
   height: auto;
-  gap: clamp(0.2rem, 0.6vh, 0.4rem);
-  margin: auto 0;
+  gap: clamp(0.2rem, 0.5vh, 0.4rem);
+  margin: 0 auto;
 }
 
-/* Rococo Frame Container - Compact proportions so it fits phones easily */
+/* Rococo Frame Container - Optimized proportions */
 .rococoFrameContainer {
   position: relative;
   width: clamp(130px, 32vw, 175px);
@@ -288,12 +288,11 @@
 }
 
 .closeButton {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  display: block;
+  margin: 1.2rem auto 0.5rem auto;
+  position: relative;
   z-index: 50;
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.15em;
