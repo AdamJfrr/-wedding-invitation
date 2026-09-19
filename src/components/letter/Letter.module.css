@@ -1,54 +1,37 @@
+/* Import Google Fonts for Wedding Calligraphy & Classic Serif Styling */
 @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap');
 
-html,
-body {
-  width: 100%;
-  min-width: 100%;
-  height: 100%;
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #f7f4ef;
-  touch-action: pan-y;
-  -webkit-text-size-adjust: 100%;
-}
-
-* {
-  box-sizing: border-box;
-}
-
+/* Fullscreen Viewport Wrapper - Allows natural mobile document flow while filling the screen */
 .wrapper {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100dvh;
-  min-height: 100dvh;
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: 'Cormorant Garamond', Georgia, serif;
   user-select: none;
-  overflow: hidden;
+  box-sizing: border-box;
   background-color: #f7f4ef;
   perspective: 1400px;
-  pointer-events: none;
-  isolation: isolate;
+  overflow-x: hidden;
 }
 
+/* Central 3D Stage Container - Centers content on all viewports with safe padding */
 .stage {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100dvh;
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d;
-  pointer-events: none;
+  padding: 3rem 1rem;
+  box-sizing: border-box;
 }
 
+/* 1. Left Flap Panel */
 .leftFlap {
   position: absolute;
   top: 0;
@@ -61,11 +44,9 @@ body {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   z-index: 20;
-  pointer-events: none;
 }
 
 .leftPhoto {
-  display: block;
   width: 200%;
   height: 100%;
   object-fit: cover;
@@ -74,9 +55,9 @@ body {
   image-rendering: high-quality;
   transform: translateZ(0);
   will-change: transform;
-  pointer-events: none;
 }
 
+/* 2. Right Flap Panel */
 .rightFlap {
   position: absolute;
   top: 0;
@@ -89,11 +70,9 @@ body {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   z-index: 20;
-  pointer-events: none;
 }
 
 .rightPhoto {
-  display: block;
   width: 200%;
   height: 100%;
   object-fit: cover;
@@ -103,9 +82,9 @@ body {
   image-rendering: high-quality;
   transform: translateZ(0);
   will-change: transform;
-  pointer-events: none;
 }
 
+/* 3. Center Wax Seal Hotspot Target */
 .sealHotspot {
   position: absolute;
   top: 53.5%;
@@ -119,12 +98,7 @@ body {
   cursor: pointer;
   z-index: 40;
   outline: none;
-  pointer-events: auto;
-  touch-action: manipulation;
-  transition:
-    transform 0.25s ease,
-    background-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: transform 0.25s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .sealHotspot:hover {
@@ -133,45 +107,32 @@ body {
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
-.sealHotspot:focus-visible {
-  outline: 2px solid rgba(56, 48, 46, 0.5);
-  outline-offset: 4px;
-}
-
+/* 4. Middle Content Card - Perfectly centered and natively scrollable on mobile */
 .card {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   width: 92vw;
   max-width: 580px;
-  height: 100dvh;
-  max-height: none;
   background-color: transparent;
   border-radius: 0;
-  padding: 3rem 1rem 4rem 1rem;
+  padding: 1.5rem 1rem 2.5rem 1rem;
   box-shadow: none;
   border: none;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
   color: #38302e;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
-  overscroll-behavior-y: contain;
-  pointer-events: auto;
   z-index: 30;
+  -webkit-overflow-scrolling: touch;
+  
+  /* Hide scrollbar for Firefox */
   scrollbar-width: none;
 }
 
+/* Hide scrollbar for Chrome, Safari, and Opera */
 .card::-webkit-scrollbar {
   display: none;
-  width: 0;
-  height: 0;
 }
 
 .cardContent {
@@ -180,9 +141,9 @@ body {
   align-items: center;
   width: 100%;
   gap: clamp(1rem, 2.2vh, 1.6rem);
-  flex-shrink: 0;
 }
 
+/* Rococo Frame Container - Large and prominent with generous bottom margin spacing */
 .rococoFrameContainer {
   position: relative;
   width: clamp(200px, 48vw, 280px);
@@ -204,19 +165,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
 }
 
 .rococoPhoto {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50% / 60%;
   filter: contrast(1.04) saturate(1.02);
-  flex-shrink: 0;
 }
 
+/* Family Parents Text Block */
 .parentsSection {
   display: flex;
   align-items: center;
@@ -230,7 +189,6 @@ body {
   color: #4a3f3c;
   width: 100%;
   flex-wrap: wrap;
-  flex-shrink: 0;
 }
 
 .parentNames {
@@ -253,9 +211,9 @@ body {
   margin: 0 auto;
   line-height: 1.35;
   letter-spacing: 0.02em;
-  flex-shrink: 0;
 }
 
+/* Heavy Romantic Focus Names Styling (Calligraphy Script) */
 .names {
   font-family: 'Alex Brush', cursive;
   font-size: clamp(2.5rem, 6vw, 3.4rem);
@@ -264,7 +222,6 @@ body {
   letter-spacing: 0.04em;
   margin: 0.4rem 0;
   line-height: 1.1;
-  flex-shrink: 0;
 }
 
 .nameAnd {
@@ -277,6 +234,7 @@ body {
   vertical-align: middle;
 }
 
+/* Translated Schedule Details Block */
 .detailsBlock {
   display: flex;
   flex-direction: column;
@@ -296,7 +254,6 @@ body {
   max-width: 520px;
   margin: 0.4rem auto 0 auto;
   line-height: 1.45;
-  flex-shrink: 0;
 }
 
 .detailLine {
@@ -304,11 +261,11 @@ body {
   padding: 0;
   border: none;
   background: transparent;
-  flex-shrink: 0;
 }
 
+/* 5. Floating Music Mute/Unmute Toggle */
 .musicToggle {
-  position: fixed;
+  position: absolute;
   top: 1rem;
   right: 1rem;
   z-index: 50;
@@ -317,7 +274,6 @@ body {
   gap: 0.4rem;
   background-color: rgba(242, 236, 229, 0.9);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   border: 1px solid #38302e;
   color: #38302e;
   padding: 0.45rem 0.8rem;
@@ -325,8 +281,6 @@ body {
   font-size: 0.7rem;
   font-family: 'Montserrat', sans-serif;
   cursor: pointer;
-  pointer-events: auto;
-  touch-action: manipulation;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.2s ease;
 }
@@ -334,11 +288,6 @@ body {
 .musicToggle:hover {
   background-color: #e5ded7;
   transform: scale(1.05);
-}
-
-.musicToggle:focus-visible {
-  outline: 2px solid rgba(56, 48, 46, 0.5);
-  outline-offset: 3px;
 }
 
 .closeButton {
@@ -354,96 +303,4 @@ body {
   text-decoration: underline;
   text-underline-offset: 4px;
   cursor: pointer;
-  pointer-events: auto;
-  touch-action: manipulation;
-  flex-shrink: 0;
-}
-
-@media (max-width: 600px) {
-  .wrapper {
-    height: 100dvh;
-    min-height: 100dvh;
-  }
-
-  .stage {
-    height: 100dvh;
-  }
-
-  .card {
-    width: 94vw;
-    height: 100dvh;
-    padding: 2.5rem 0.75rem 5rem 0.75rem;
-    overflow-y: auto;
-    overflow-x: hidden;
-    touch-action: pan-y;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .cardContent {
-    min-height: max-content;
-  }
-
-  .rococoFrameContainer {
-    width: clamp(190px, 58vw, 260px);
-    height: clamp(245px, 72vw, 335px);
-  }
-
-  .names {
-    font-size: clamp(2.5rem, 12vw, 3.3rem);
-  }
-
-  .musicToggle {
-    top: 0.75rem;
-    right: 0.75rem;
-    padding: 0.4rem 0.65rem;
-  }
-}
-
-@media (max-width: 380px) {
-  .card {
-    width: 96vw;
-    padding: 2.25rem 0.5rem 5rem 0.5rem;
-  }
-
-  .rococoFrameContainer {
-    width: 185px;
-    height: 240px;
-    margin-bottom: 1.75rem;
-  }
-
-  .parentsSection {
-    font-size: 0.68rem;
-  }
-
-  .inviteText {
-    font-size: 0.76rem;
-  }
-
-  .detailsBlock {
-    font-size: 0.74rem;
-  }
-}
-
-@media (max-height: 600px) and (orientation: landscape) {
-  .card {
-    height: 100dvh;
-    padding: 1.5rem 1rem 4rem 1rem;
-  }
-
-  .rococoFrameContainer {
-    width: 180px;
-    height: 220px;
-    margin-bottom: 1.5rem;
-  }
-
-  .names {
-    font-size: 2.5rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sealHotspot,
-  .musicToggle {
-    transition: none;
-  }
 }
