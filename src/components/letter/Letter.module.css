@@ -17,6 +17,7 @@
   box-sizing: border-box;
   background-color: #f7f4ef;
   perspective: 1400px;
+  pointer-events: none; /* Allows touches to pass through background gaps so mobile scrolling works */
 }
 
 /* Central 3D Stage Container */
@@ -28,6 +29,7 @@
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d;
+  pointer-events: none;
 }
 
 /* 1. Left Flap Panel */
@@ -97,6 +99,7 @@
   cursor: pointer;
   z-index: 40;
   outline: none;
+  pointer-events: auto;
   transition: transform 0.25s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -106,7 +109,7 @@
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
-/* 4. Middle Content Card - Scrollable with clean hidden scrollbars */
+/* 4. Middle Content Card - Scrollable with clean hidden scrollbars and active touch */
 .card {
   position: relative;
   width: 92vw;
@@ -124,7 +127,8 @@
   box-sizing: border-box;
   color: #38302e;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch; /* Crucial for smooth momentum scrolling on mobile */
+  pointer-events: auto; /* Enables touch scrolling and interaction inside the card */
   z-index: 30;
   
   /* Hide scrollbar for Firefox */
@@ -144,12 +148,12 @@
   gap: clamp(1rem, 2.2vh, 1.6rem);
 }
 
-/* Rococo Frame Container - Added generous bottom margin for breathing room */
+/* Rococo Frame Container - Large and prominent with generous bottom margin spacing */
 .rococoFrameContainer {
   position: relative;
   width: clamp(200px, 48vw, 280px);
   height: clamp(260px, 62vw, 360px);
-  margin: 0 auto 1.8rem auto;
+  margin: 0 auto 2.2rem auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -282,6 +286,7 @@
   font-size: 0.7rem;
   font-family: 'Montserrat', sans-serif;
   cursor: pointer;
+  pointer-events: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.2s ease;
 }
