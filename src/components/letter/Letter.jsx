@@ -77,13 +77,11 @@ export default function Letter() {
             {/* Rococo-style Photo Frame matching the requested design */}
             <div className={styles.rococoFrameContainer}>
               <div className={styles.rococoBorder}>
-                <div className={styles.rococoTopDecor}></div>
                 <img
                   src={couple}
                   alt="Couple"
                   className={styles.rococoPhoto}
                 />
-                <div className={styles.rococoBottomDecor}></div>
               </div>
             </div>
 
@@ -106,6 +104,15 @@ export default function Letter() {
                 </p>
               ))}
             </div>
+
+            {isOpen && (
+              <button
+                onClick={() => setIsOpen(false)}
+                className={styles.closeButton}
+              >
+                Close Envelope
+              </button>
+            )}
           </div>
         </motion.div>
 
@@ -166,17 +173,6 @@ export default function Letter() {
           </>
         )}
       </motion.button>
-
-      {isOpen && (
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          onClick={() => setIsOpen(false)}
-          className={styles.closeButton}
-        >
-          Close Envelope
-        </motion.button>
-      )}
     </div>
   );
 }
