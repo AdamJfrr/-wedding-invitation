@@ -222,29 +222,6 @@ export default function Letter() {
               </div>
             </div>
 
-            {/* Countdown Timer */}
-            <div className={styles.countdownContainer}>
-              <div className={styles.countdownBox}>
-                <span className={styles.countdownNumber}>{timeLeft.days}</span>
-                <span className={styles.countdownLabel}>Days</span>
-              </div>
-              <span className={styles.countdownColon}>:</span>
-              <div className={styles.countdownBox}>
-                <span className={styles.countdownNumber}>{timeLeft.hours}</span>
-                <span className={styles.countdownLabel}>Hours</span>
-              </div>
-              <span className={styles.countdownColon}>:</span>
-              <div className={styles.countdownBox}>
-                <span className={styles.countdownNumber}>{timeLeft.minutes}</span>
-                <span className={styles.countdownLabel}>Minutes</span>
-              </div>
-              <span className={styles.countdownColon}>:</span>
-              <div className={styles.countdownBox}>
-                <span className={styles.countdownNumber}>{timeLeft.seconds}</span>
-                <span className={styles.countdownLabel}>Seconds</span>
-              </div>
-            </div>
-
             {/* RSVP Section */}
             <div className={styles.rsvpSection}>
               <h2 className={styles.rsvpTitle}>RSVP</h2>
@@ -270,6 +247,29 @@ export default function Letter() {
                   <MessageCircle size={15} aria-hidden="true" />
                   <span>RSVP Bride (Christine)</span>
                 </a>
+              </div>
+            </div>
+
+            {/* Countdown Timer */}
+            <div className={styles.countdownContainer}>
+              <div className={styles.countdownBox}>
+                <span className={styles.countdownNumber}>{timeLeft.days}</span>
+                <span className={styles.countdownLabel}>Days</span>
+              </div>
+              <span className={styles.countdownColon}>:</span>
+              <div className={styles.countdownBox}>
+                <span className={styles.countdownNumber}>{timeLeft.hours}</span>
+                <span className={styles.countdownLabel}>Hours</span>
+              </div>
+              <span className={styles.countdownColon}>:</span>
+              <div className={styles.countdownBox}>
+                <span className={styles.countdownNumber}>{timeLeft.minutes}</span>
+                <span className={styles.countdownLabel}>Minutes</span>
+              </div>
+              <span className={styles.countdownColon}>:</span>
+              <div className={styles.countdownBox}>
+                <span className={styles.countdownNumber}>{timeLeft.seconds}</span>
+                <span className={styles.countdownLabel}>Seconds</span>
               </div>
             </div>
 
