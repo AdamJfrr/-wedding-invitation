@@ -46,7 +46,7 @@ const wedding = {
     {
       id: 1,
       prefix: "The celebration will begin at 12:00 noon at ",
-      location: "Khaliat Al-Saleha – Ras Al-Maten",
+      location: "Khaliat Al-Salha – Ras Al-Maten",
       mapUrl: MAPS_KHALIAT,
       suffix: ".",
     },
@@ -64,14 +64,14 @@ const wedding = {
     {
       id: 4,
       prefix: "Reception: from 5:00 PM until 6:30 PM at ",
-      location: "Khaliat Al-Saleha – Ras Al-Maten",
+      location: "Khaliat Al-Salha – Ras Al-Maten",
       mapUrl: MAPS_KHALIAT,
       suffix: ".",
     },
     {
       id: 5,
       prefix: "The evening festivities will take place at 8:30 PM at ",
-      location: "Khaliat Al-Saleha – Ras Al-Maten",
+      location: "Khaliat Al-Salha – Ras Al-Maten",
       mapUrl: MAPS_KHALIAT,
       suffix: ".",
     },
