@@ -57,7 +57,7 @@ const wedding = {
     {
       id: 3,
       prefix: "1:30 PM at ",
-      location: "Dar Al-Balda, Bchetfine",
+      location: "Dar Al-Balda, Bchatfine",
       mapUrl: MAPS_BCHEFTINE,
       suffix: " (for the bride's family).",
     },
