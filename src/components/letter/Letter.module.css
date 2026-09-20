@@ -61,9 +61,6 @@ select {
   pointer-events: none;
 }
 
-/* Perspective must live on the direct parent of the rotating flaps.
-   No preserve-3d here: it breaks z-index ordering and can make the
-   back of the flap show through as a mirrored image in Safari. */
 .stage {
   position: absolute;
   inset: 0;
@@ -76,8 +73,6 @@ select {
 
 /* ------------------------------------------------------------------
    Envelope doors
-   Each flap overlaps the centre line by 1px so no hairline seam
-   shows between the halves at fractional pixel widths.
 ------------------------------------------------------------------- */
 .leftFlap,
 .rightFlap {
@@ -154,10 +149,6 @@ select {
   outline-offset: 4px;
 }
 
-/* ------------------------------------------------------------------
-   Card (scrolls when content is taller than the screen, and centres
-   vertically when it is shorter, via margin: auto on the content)
-------------------------------------------------------------------- */
 .card {
   position: absolute;
   top: 0;
@@ -189,7 +180,7 @@ select {
 .cardContent {
   position: relative;
   width: min(580px, calc(100% - 32px));
-  margin: auto; /* centres when short, scrolls safely when tall */
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -198,22 +189,36 @@ select {
 }
 
 /* ------------------------------------------------------------------
-   Photo
+   Photo & Custom Frame
 ------------------------------------------------------------------- */
 .rococoFrameContainer {
   position: relative;
-  width: clamp(190px, 52vw, 270px);
-  aspect-ratio: 7 / 9;
+  width: clamp(300px, 80vw, 420px);
+  aspect-ratio: 4 / 5;
   margin: 0 auto 0.5rem;
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.decorativeFrame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .rococoBorder {
-  width: 100%;
-  height: 100%;
-  padding: 2px;
-  border-radius: 50% / 60%;
-  background: transparent;
+  position: relative;
+  width: 72%;
+  height: 80%;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 50%;
 }
 
 .rococoPhoto {
@@ -221,42 +226,12 @@ select {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  border-radius: 50% / 60%;
   filter: contrast(1.04) saturate(1.02);
 }
 
 /* ------------------------------------------------------------------
    Text
 ------------------------------------------------------------------- */
-.parentsSection {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  line-height: 1.5;
-  text-transform: uppercase;
-  color: #4a3f3c;
-}
-
-.parentNames {
-  font-weight: 500;
-  text-wrap: balance;
-}
-
-.parentAmpersand {
-  color: #000;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2em;
-  font-style: italic;
-  text-transform: none;
-}
-
 .inviteText {
   width: 100%;
   max-width: 480px;
@@ -270,8 +245,6 @@ select {
   text-wrap: balance;
 }
 
-/* Script fonts must not be letter-spaced or the joins between
-   letters break apart. */
 .names {
   width: 100%;
   margin: 0.25rem auto;
@@ -294,27 +267,198 @@ select {
   vertical-align: middle;
 }
 
-.detailsBlock {
+/* ------------------------------------------------------------------
+   Schedule Section & Calligraphy Lines
+------------------------------------------------------------------- */
+.scheduleSection {
   width: 100%;
   max-width: 520px;
-  margin: 0.25rem auto 0;
+  margin: 2.5rem auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
+}
+
+.scheduleTitle {
+  font-family: 'Alex Brush', cursive;
+  font-size: clamp(2rem, 8vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1;
+  margin: 0 0 0.4rem 0;
+  color: #241c1a;
+  letter-spacing: 0;
+}
+
+.detailsBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1rem, 2.6vw, 1.1rem);
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
   font-style: italic;
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.4;
   letter-spacing: 0.01em;
   color: #3b312e;
+  border-top: 1px solid rgba(191, 168, 155, 0.6);
+  border-bottom: 1px solid rgba(191, 168, 155, 0.6);
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
 .detailLine {
   width: 100%;
   margin: 0;
   text-wrap: balance;
+}
+
+/* ------------------------------------------------------------------
+   Countdown Timer
+------------------------------------------------------------------- */
+.countdownContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 520px;
+  margin: 1.5rem auto 0;
+  padding: 0.5rem 1rem;
+}
+
+.countdownBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 55px;
+}
+
+.countdownNumber {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #241c1a;
+  line-height: 1;
+}
+
+.countdownLabel {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b5e59;
+  margin-top: 0.35rem;
+}
+
+.countdownColon {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #594d48;
+  margin-bottom: 0.9rem;
+}
+
+/* ------------------------------------------------------------------
+   RSVP Section (Container with #dfe1f1 background)
+------------------------------------------------------------------- */
+.rsvpSection {
+  width: 100%;
+  max-width: 480px;
+  margin: 2rem auto 0;
+  padding: 1.75rem 1.5rem;
+  background-color: #dfe1f1;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.rsvpTitle {
+  font-family: 'Alex Brush', cursive;
+  font-size: clamp(2.2rem, 8vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1;
+  margin: 0;
+  color: #241c1a;
+}
+
+.rsvpSubtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  font-style: italic;
+  font-weight: 400;
+  color: #594d48;
+  margin: 0 0 1rem 0;
+}
+
+.rsvpActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+/* Primary Button (Groom) */
+.rsvpButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border: 1px solid #38302e;
+  border-radius: 25px;
+  background: #38302e;
+  color: #f7f4ef;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Secondary Button (Bride) - Transparent Background */
+.rsvpSecondary {
+  background: transparent;
+  color: #38302e;
+  border: 1px solid #38302e;
+  box-shadow: none;
+}
+
+@media (hover: hover) {
+  .rsvpButton:hover {
+    background: #241c1a;
+    color: #ffffff;
+    border-color: #241c1a;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .rsvpSecondary:hover {
+    background: rgba(56, 48, 46, 0.08);
+    color: #241c1a;
+    border-color: #241c1a;
+    transform: translateY(-1px);
+    box-shadow: none;
+  }
+}
+
+.rsvpButton:focus-visible {
+  outline: 2px solid rgba(56, 48, 46, 0.6);
+  outline-offset: 3px;
 }
 
 /* ------------------------------------------------------------------
@@ -380,13 +524,6 @@ select {
 /* ------------------------------------------------------------------
    Responsive
 ------------------------------------------------------------------- */
-@media (max-width: 520px) {
-  .parentsSection {
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-}
-
 @media (max-width: 380px) {
   .cardContent {
     width: calc(100% - 24px);
@@ -394,11 +531,20 @@ select {
   }
 
   .rococoFrameContainer {
-    width: 185px;
+    width: 260px;
   }
 
-  .parentsSection {
-    font-size: 0.72rem;
+  .rsvpSection {
+    padding: 1.25rem 1rem;
+  }
+
+  .rsvpActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .rsvpButton {
+    width: 100%;
   }
 }
 
@@ -408,7 +554,7 @@ select {
   }
 
   .rococoFrameContainer {
-    width: 150px;
+    width: 200px;
   }
 
   .names {
@@ -418,7 +564,8 @@ select {
 
 @media (prefers-reduced-motion: reduce) {
   .sealHotspot,
-  .musicToggle {
+  .musicToggle,
+  .rsvpButton {
     transition: none;
   }
 }

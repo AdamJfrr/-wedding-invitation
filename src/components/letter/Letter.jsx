@@ -1,17 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Volume2, VolumeX } from "lucide-react";
+import { Volume2, VolumeX, MessageCircle } from "lucide-react";
 import styles from "./Letter.module.css";
 import weddingBg from "../../images/wedding.jpg";
 import couple from "../../images/couple.png";
 
 const wedding = {
-  parentsGroom: "Ziad and Nadia Daniel",
-  parentsBride: "Moufid and Amira Jaafar",
   groom: "Ehab",
   bride: "Christine",
   invitationText:
-    "have the pleasure of inviting you to attend the wedding celebration of their children",
+    "have the pleasure of inviting you to attend the wedding celebration on 17-10-2026",
   schedule: [
     "The celebration will begin at 12:00 noon at Khalia Al-Saleha – Ras Al-Maten.",
     "The wedding procession will depart at 12:30 PM (for the groom's family).",
@@ -19,6 +17,9 @@ const wedding = {
     "Reception: from 5:00 PM until 6:30 PM.",
     "The evening festivities will take place at the Al-Rahm Gardens.",
   ],
+  // RSVP WhatsApp Numbers (Formatted without + or spaces for WhatsApp URL)
+  groomWhatsapp: "4915561798504",
+  brideWhatsapp: "96176756266",
 };
 
 export default function Letter() {
@@ -27,6 +28,31 @@ export default function Letter() {
   const audioRef = useRef(null);
   const cardRef = useRef(null);
   const reduceMotion = useReducedMotion();
+
+  // Countdown timer state
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const targetDate = new Date("2026-10-17T00:00:00").getTime();
+
+    const updateTimer = () => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        });
+      }
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const playAudio = () => {
     const audio = audioRef.current;
@@ -44,7 +70,6 @@ export default function Letter() {
   };
 
   const handleOpenLetter = () => {
-    // Always start at the top of the invitation
     if (cardRef.current) cardRef.current.scrollTop = 0;
     setIsOpen(true);
     playAudio();
@@ -66,6 +91,14 @@ export default function Letter() {
     duration: reduceMotion ? 0.4 : 2.5,
     ease: [0.4, 0, 0.2, 1],
   };
+
+  // Pre-filled WhatsApp response messages
+  const groomMsg = encodeURIComponent(
+    `Hello Ehab, I would love to confirm my attendance for your wedding on 17-10-2026!`
+  );
+  const brideMsg = encodeURIComponent(
+    `Hello Christine, I would love to confirm my attendance for your wedding on 17-10-2026!`
+  );
 
   return (
     <div className={styles.wrapper}>
@@ -103,25 +136,74 @@ export default function Letter() {
               </div>
             </div>
 
-            <div className={styles.parentsSection}>
-              <span className={styles.parentNames}>{wedding.parentsGroom}</span>
-              <span className={styles.parentAmpersand}>&amp;</span>
-              <span className={styles.parentNames}>{wedding.parentsBride}</span>
-            </div>
-
-            <p className={styles.inviteText}>{wedding.invitationText}</p>
-
             <h1 className={styles.names}>
               {wedding.groom} <span className={styles.nameAnd}>&amp;</span>{" "}
               {wedding.bride}
             </h1>
 
-            <div className={styles.detailsBlock}>
-              {wedding.schedule.map((line) => (
-                <p key={line} className={styles.detailLine}>
-                  {line}
-                </p>
-              ))}
+            <p className={styles.inviteText}>{wedding.invitationText}</p>
+
+            {/* Schedule Section with Calligraphy Lines */}
+            <div className={styles.scheduleSection}>
+              <h2 className={styles.scheduleTitle}>Schedule</h2>
+              <div className={styles.detailsBlock}>
+                {wedding.schedule.map((line) => (
+                  <p key={line} className={styles.detailLine}>
+                    {line}
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            {/* Countdown Timer */}
+            <div className={styles.countdownContainer}>
+              <div className={styles.countdownBox}>
+                <span className={styles.countdownNumber}>{timeLeft.days}</span>
+                <span className={styles.countdownLabel}>Days</span>
+              </div>
+              <span className={styles.countdownColon}>:</span>
+              <div className={styles.countdownBox}>
+                <span className={styles.countdownNumber}>{timeLeft.hours}</span>
+                <span className={styles.countdownLabel}>Hours</span>
+              </div>
+              <span className={styles.countdownColon}>:</span>
+              <div className={styles.countdownBox}>
+                <span className={styles.countdownNumber}>{timeLeft.minutes}</span>
+                <span className={styles.countdownLabel}>Minutes</span>
+              </div>
+              <span className={styles.countdownColon}>:</span>
+              <div className={styles.countdownBox}>
+                <span className={styles.countdownNumber}>{timeLeft.seconds}</span>
+                <span className={styles.countdownLabel}>Seconds</span>
+              </div>
+            </div>
+
+            {/* RSVP Section */}
+            <div className={styles.rsvpSection}>
+              <h2 className={styles.rsvpTitle}>RSVP</h2>
+              <p className={styles.rsvpSubtitle}>
+                Please kindly confirm your presence via WhatsApp
+              </p>
+              <div className={styles.rsvpActions}>
+                <a
+                  href={`https://wa.me/${wedding.groomWhatsapp}?text=${groomMsg}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.rsvpButton}
+                >
+                  <MessageCircle size={15} aria-hidden="true" />
+                  <span>RSVP Groom (Ehab)</span>
+                </a>
+                <a
+                  href={`https://wa.me/${wedding.brideWhatsapp}?text=${brideMsg}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.rsvpButton} ${styles.rsvpSecondary}`}
+                >
+                  <MessageCircle size={15} aria-hidden="true" />
+                  <span>RSVP Bride (Christine)</span>
+                </a>
+              </div>
             </div>
 
             {isOpen && (
