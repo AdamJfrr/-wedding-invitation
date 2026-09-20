@@ -11,11 +11,11 @@ const wedding = {
   invitationText:
     "have the pleasure of inviting you to attend the wedding celebration on 17-10-2026",
   schedule: [
-    "The celebration will begin at 12:00 noon at Khalia Al-Saleha – Ras Al-Maten.",
+    "The celebration will begin at 12:00 noon at Khaliat Al-Saleha – Ras Al-Maten.",
     "The wedding procession will depart at 12:30 PM (for the groom's family).",
-    "1:00 PM at Dar Al-Balad, Bshatin (for the bride's family).",
-    "Reception: from 5:00 PM until 6:30 PM.",
-    "The evening festivities will take place at the Al-Rahm Gardens.",
+    "1:30 PM at Dar Al-Balda, Bchetfine (for the bride's family).",
+    "Reception: from 5:00 PM until 6:30 PM  at Khaliat Al-Saleha – Ras Al-Maten.",
+    "The evening festivities will take place at 8:30 PM  at Khaliat Al-Saleha – Ras Al-Maten.",
   ],
   // RSVP WhatsApp Numbers (Formatted without + or spaces for WhatsApp URL)
   groomWhatsapp: "4915561798504",
