@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600&family=Montserrat:wght@300;400;500&display=swap');
 
 /* ------------------------------------------------------------------
-   Global locks. These really belong in index.css, not a CSS module,
-   because they lock scrolling for the entire app.
+   Global locks.
 ------------------------------------------------------------------- */
 html,
 body,
@@ -316,6 +315,52 @@ select {
 }
 
 /* ------------------------------------------------------------------
+   Classy Location Link & Pin Icon
+------------------------------------------------------------------- */
+.locationLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  color: #3b312e;
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  border-bottom: 1px dashed rgba(59, 49, 46, 0.4);
+  padding-bottom: 1px;
+  transition: all 0.25s ease;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.locationPin {
+  width: 1.1em;
+  height: 1.1em;
+  color: #6b5e59;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+@media (hover: hover) {
+  .locationLink:hover {
+    color: #241c1a;
+    border-bottom-color: #241c1a;
+  }
+
+  .locationLink:hover .locationPin {
+    color: #241c1a;
+    transform: translateY(-2px);
+  }
+}
+
+.locationLink:focus-visible {
+  outline: 2px solid rgba(56, 48, 46, 0.6);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ------------------------------------------------------------------
    Countdown Timer
 ------------------------------------------------------------------- */
 .countdownContainer {
@@ -363,20 +408,20 @@ select {
 }
 
 /* ------------------------------------------------------------------
-   RSVP Section (Container with #dfe1f1 background)
+   RSVP Section (Background color: #cdd4e5)
 ------------------------------------------------------------------- */
 .rsvpSection {
   width: 100%;
   max-width: 480px;
   margin: 2rem auto 0;
   padding: 1.75rem 1.5rem;
-  background-color: #dfe1f1;
+  background-color: #cdd4e5;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
 }
 
 .rsvpTitle {
@@ -393,7 +438,7 @@ select {
   font-size: clamp(0.95rem, 2.5vw, 1.05rem);
   font-style: italic;
   font-weight: 400;
-  color: #594d48;
+  color: #3b312e;
   margin: 0 0 1rem 0;
 }
 
@@ -565,7 +610,9 @@ select {
 @media (prefers-reduced-motion: reduce) {
   .sealHotspot,
   .musicToggle,
-  .rsvpButton {
+  .rsvpButton,
+  .locationLink,
+  .locationPin {
     transition: none;
   }
 }

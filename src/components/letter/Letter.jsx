@@ -5,17 +5,76 @@ import styles from "./Letter.module.css";
 import weddingBg from "../../images/wedding.jpg";
 import couple from "../../images/couple.png";
 
+// Location Map Links
+const MAPS_KHALIAT = "https://www.google.com/maps/search/?api=1&query=33.849041,35.654476";
+const MAPS_BCHEFTINE = "https://www.google.com/maps/search/?api=1&query=33.7117,35.5514";
+
+const LocationPin = () => (
+  <svg
+    className={styles.locationPin}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+const LocationLink = ({ text, href }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={styles.locationLink}
+  >
+    <LocationPin />
+    <span>{text}</span>
+  </a>
+);
+
 const wedding = {
   groom: "Ehab",
   bride: "Christine",
   invitationText:
     "have the pleasure of inviting you to attend the wedding celebration on 17-10-2026",
   schedule: [
-    "The celebration will begin at 12:00 noon at Khaliat Al-Saleha – Ras Al-Maten.",
-    "The wedding procession will depart at 12:30 PM (for the groom's family).",
-    "1:30 PM at Dar Al-Balda, Bchetfine (for the bride's family).",
-    "Reception: from 5:00 PM until 6:30 PM  at Khaliat Al-Saleha – Ras Al-Maten.",
-    "The evening festivities will take place at 8:30 PM  at Khaliat Al-Saleha – Ras Al-Maten.",
+    {
+      id: 1,
+      prefix: "The celebration will begin at 12:00 noon at ",
+      location: "Khaliat Al-Saleha – Ras Al-Maten",
+      mapUrl: MAPS_KHALIAT,
+      suffix: ".",
+    },
+    {
+      id: 2,
+      text: "The wedding procession will depart at 12:30 PM (for the groom's family).",
+    },
+    {
+      id: 3,
+      prefix: "1:30 PM at ",
+      location: "Dar Al-Balda, Bchetfine",
+      mapUrl: MAPS_BCHEFTINE,
+      suffix: " (for the bride's family).",
+    },
+    {
+      id: 4,
+      prefix: "Reception: from 5:00 PM until 6:30 PM at ",
+      location: "Khaliat Al-Saleha – Ras Al-Maten",
+      mapUrl: MAPS_KHALIAT,
+      suffix: ".",
+    },
+    {
+      id: 5,
+      prefix: "The evening festivities will take place at 8:30 PM at ",
+      location: "Khaliat Al-Saleha – Ras Al-Maten",
+      mapUrl: MAPS_KHALIAT,
+      suffix: ".",
+    },
   ],
   // RSVP WhatsApp Numbers (Formatted without + or spaces for WhatsApp URL)
   groomWhatsapp: "4915561798504",
@@ -143,13 +202,21 @@ export default function Letter() {
 
             <p className={styles.inviteText}>{wedding.invitationText}</p>
 
-            {/* Schedule Section with Calligraphy Lines */}
+            {/* Schedule Section with Interactive Map Links */}
             <div className={styles.scheduleSection}>
               <h2 className={styles.scheduleTitle}>Schedule</h2>
               <div className={styles.detailsBlock}>
-                {wedding.schedule.map((line) => (
-                  <p key={line} className={styles.detailLine}>
-                    {line}
+                {wedding.schedule.map((item) => (
+                  <p key={item.id} className={styles.detailLine}>
+                    {item.location ? (
+                      <>
+                        {item.prefix}
+                        <LocationLink text={item.location} href={item.mapUrl} />
+                        {item.suffix}
+                      </>
+                    ) : (
+                      item.text
+                    )}
                   </p>
                 ))}
               </div>
